@@ -18,4 +18,4 @@ if [[ ! -d "/server/minecraft-server" ]]; then
     git clone https://github.com/invermn/minecraft-server;
 fi
 
-tmux new -d -s server "cd /server/minecraft-server; java -jar server.jar nogui";
+tmux new -d -s server "cd /server/minecraft-server; java -jar -Xmx6G -Xms4G server.jar nogui";
