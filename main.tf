@@ -59,11 +59,16 @@ resource "google_compute_firewall" "server_ingress" {
     protocol = "tcp"
     ports = ["25565", "22"]
   }
+
+  allow {
+    protocol = "udp"
+    ports = ["19132"]
+  }
 }
 
 resource "google_compute_instance" "server" {
   name = "minecraft-server"
-  machine_type = "e2-medium"
+  machine_type = "e2-standard-2"
   zone = "europe-central2-a"
   tags = ["server"]
 
@@ -121,7 +126,7 @@ resource "google_compute_resource_policy" "server_snapshot" {
       }
     }
     retention_policy {
-      max_retention_days = 3
+      max_retention_days = 1
       on_source_disk_delete = "APPLY_RETENTION_POLICY"
     }
   }
